@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Moringa Kitchen — Everyday Nutrition Made Simple</title>
+<meta name="description" content="Moringa powders and cooking blends for everyday Indian meals, with QR-linked recipes on every pack.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Fraunces:opsz,wght@9..144,500;9..144,700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --leaf:#2f6b3a; --leaf-dark:#1f4a28; --leaf-soft:#e6efdc; --lime:#a8c957;
+  --cream:#faf6ec; --white:#fff; --brown:#6b4a2f; --ink:#25301f; --muted:#667060;
+  --radius:20px; --shadow:0 10px 30px rgba(47,107,58,.12);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);line-height:1.6}
+h1,h2,h3{font-family:'Fraunces',serif;line-height:1.15;color:var(--leaf-dark)}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+.wrap{width:min(1120px,92%);margin:auto}
+section{padding:84px 0}
+.eyebrow{display:inline-block;font-size:.8rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--leaf);background:var(--leaf-soft);padding:6px 14px;border-radius:99px;margin-bottom:16px}
+.section-head{max-width:640px;margin-bottom:44px}
+.section-head h2{font-size:clamp(1.9rem,4vw,2.7rem);margin-bottom:12px}
+.section-head p{color:var(--muted)}
+.btn{display:inline-block;border:0;cursor:pointer;font:700 1rem 'DM Sans',sans-serif;padding:14px 28px;border-radius:99px;transition:.2s}
+.btn-primary{background:var(--leaf);color:#fff}
+.btn-primary:hover{background:var(--leaf-dark);transform:translateY(-2px)}
+.btn-ghost{border:2px solid var(--leaf);color:var(--leaf);background:transparent}
+.btn-ghost:hover{background:var(--leaf);color:#fff}
+.btn-sm{padding:10px 20px;font-size:.92rem}
+
+/* Image frames: show a tidy placeholder if the picture file is missing */
+.img{position:relative;overflow:hidden;background:linear-gradient(135deg,#d9e7c8,#bcd49a);border-radius:var(--radius)}
+.img::after{content:attr(data-name);position:absolute;inset:0;display:grid;place-items:center;color:var(--leaf);font-weight:700;opacity:.55;letter-spacing:.05em}
+.img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1}
+
+/* Header */
+header{position:sticky;top:0;z-index:50;background:rgba(250,246,236,.92);backdrop-filter:blur(10px);border-bottom:1px solid rgba(47,107,58,.1)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:72px}
+.logo{font-family:'Fraunces',serif;font-weight:700;font-size:1.45rem;color:var(--leaf-dark);display:flex;align-items:center;gap:8px}
+.logo span.leaf{display:grid;place-items:center;width:34px;height:34px;border-radius:50% 0 50% 0;background:var(--leaf);color:#fff;font-size:1rem}
+nav ul{display:flex;gap:30px;list-style:none;font-weight:500}
+nav a:hover{color:var(--leaf)}
+.nav-right{display:flex;align-items:center;gap:14px}
+.cart-btn{position:relative;background:var(--leaf-soft);border:0;border-radius:99px;padding:10px 18px;font-weight:700;color:var(--leaf-dark);cursor:pointer}
+.cart-btn b{background:var(--leaf);color:#fff;border-radius:99px;padding:1px 8px;margin-left:6px;font-size:.85rem}
+.menu-toggle{display:none;background:none;border:0;font-size:1.7rem;cursor:pointer;color:var(--leaf-dark)}
+
+/* Hero */
+.hero{padding:56px 0 84px;background:radial-gradient(circle at 85% 20%,#e6efdc 0,transparent 55%)}
+.hero-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:56px;align-items:center}
+.hero h1{font-size:clamp(2.4rem,5.4vw,4rem);margin-bottom:18px}
+.hero h1 em{font-style:normal;color:var(--leaf);background:linear-gradient(transparent 62%,rgba(168,201,87,.55) 62%)}
+.hero p.lead{font-size:1.12rem;color:var(--muted);max-width:520px;margin-bottom:24px}
+.hero ul{list-style:none;margin-bottom:30px;display:grid;gap:8px}
+.hero ul li::before{content:"🌿 "}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap}
+.hero-img{aspect-ratio:1/1.05;border-radius:44% 56% 48% 52%/52% 44% 56% 48%;box-shadow:var(--shadow)}
+.hero-visual{position:relative}
+.badge{position:absolute;left:-18px;bottom:36px;display:flex;align-items:center;gap:12px;background:#fff;border:1px solid rgba(47,107,58,.1);border-radius:16px;padding:10px 12px 10px 16px;box-shadow:var(--shadow);font-size:.92rem;font-weight:700;z-index:3}
+.badge small{display:block;font-size:.78rem;font-weight:500;color:var(--muted)}
+.badge-qr{width:58px;height:58px;object-fit:contain;padding:3px;background:#fff;border:1px solid rgba(47,107,58,.12);border-radius:10px}
+
+/* Marquee strip */
+.strip{background:var(--leaf-dark);color:#eaf2dc;padding:18px 0;font-weight:500}
+.strip .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;text-align:center}
+
+/* Products */
+.products-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:28px}
+.card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column;transition:.25s}
+.card:hover{transform:translateY(-6px)}
+.card .img{border-radius:0;aspect-ratio:4/3}
+.card-body{padding:24px;display:flex;flex-direction:column;gap:10px;flex:1}
+.tag{align-self:flex-start;font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:4px 12px;border-radius:99px}
+.tag.single{background:var(--leaf-soft);color:var(--leaf)}
+.tag.combo{background:#f3e3cf;color:var(--brown)}
+.card h3{font-size:1.4rem}
+.card p{color:var(--muted);font-size:.96rem}
+.card ul{list-style:none;font-size:.92rem;display:grid;gap:4px}
+.card ul li::before{content:"✓ ";color:var(--leaf);font-weight:700}
+.card-foot{margin-top:auto;display:flex;justify-content:space-between;align-items:center;padding-top:14px;border-top:1px dashed #d9dfcd}
+.price{font-family:'Fraunces',serif;font-size:1.6rem;font-weight:700;color:var(--leaf-dark)}
+.price.tbd{font-size:1rem;color:var(--muted);font-family:'DM Sans',sans-serif;font-weight:500}
+.note{margin-top:24px;font-size:.85rem;color:var(--muted);text-align:center}
+
+/* QR section */
+.qr{background:var(--leaf-soft)}
+.qr-steps{display:grid;gap:24px;max-width:900px;margin:auto}
+.step{display:grid;grid-template-columns:1fr 1.1fr;gap:32px;align-items:center;background:#fff;border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}
+.step:nth-child(even){grid-template-columns:1.1fr 1fr}
+.step:nth-child(even) .img{order:2}
+.step .img{aspect-ratio:16/10}
+.step .num{display:grid;place-items:center;width:48px;height:48px;border-radius:50%;background:var(--leaf);color:#fff;font:700 1.3rem 'Fraunces',serif;margin-bottom:12px}
+.step h3{font-size:1.6rem;margin-bottom:8px}
+.step p{color:var(--muted)}
+.scan-line{text-align:center;margin-top:40px;font-family:'Fraunces',serif;font-size:1.6rem;color:var(--leaf-dark)}
+
+/* Recipes */
+.filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:28px}
+.chip{border:2px solid var(--leaf-soft);background:#fff;border-radius:99px;padding:8px 18px;font:500 .95rem 'DM Sans',sans-serif;cursor:pointer;color:var(--ink);transition:.2s}
+.chip.active,.chip:hover{background:var(--leaf);border-color:var(--leaf);color:#fff}
+.recipes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.recipe{background:#fff;border-radius:var(--radius);padding:26px;box-shadow:var(--shadow);transition:.25s}
+.recipe:hover{transform:translateY(-4px)}
+.recipe .emoji{font-size:2.2rem;margin-bottom:10px}
+.recipe h3{font-size:1.25rem;margin-bottom:6px}
+.recipe .meta{font-size:.85rem;color:var(--muted);margin-bottom:12px}
+.recipe .uses{display:inline-block;font-size:.8rem;background:var(--leaf-soft);color:var(--leaf-dark);padding:4px 12px;border-radius:99px;font-weight:700}
+.recipe.hide{display:none}
+
+/* Features */
+.features-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.feature{background:#fff;border-radius:var(--radius);padding:26px;border:1px solid rgba(47,107,58,.1)}
+.feature .ico{font-size:1.9rem;margin-bottom:10px}
+.feature h3{font-size:1.1rem;margin-bottom:6px}
+.feature p{font-size:.92rem;color:var(--muted)}
+
+/* Combo builder */
+.builder{background:var(--leaf-dark);color:#fff;border-radius:28px;padding:44px;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.builder h2{color:#fff;font-size:2rem;margin-bottom:10px}
+.builder p{color:#cfe0b8}
+.builder-opts{display:grid;gap:12px}
+.opt{display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,.08);border-radius:14px;padding:14px 18px;cursor:pointer}
+.opt label{display:flex;gap:12px;align-items:center;cursor:pointer;font-weight:500}
+.opt input{accent-color:var(--lime);width:18px;height:18px}
+.total{display:flex;justify-content:space-between;align-items:center;margin-top:8px;font-size:1.2rem;font-weight:700}
+.total span:last-child{font-family:'Fraunces',serif;font-size:1.8rem;color:var(--lime)}
+
+/* About */
+.about-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:56px;align-items:center}
+.about-grid .img{aspect-ratio:1/1;border-radius:var(--radius)}
+.about-grid h2{font-size:clamp(1.9rem,4vw,2.6rem);margin-bottom:16px}
+.about-grid p{color:var(--muted);margin-bottom:14px}
+.trust{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
+.trust span{background:#fff;border:1px solid rgba(47,107,58,.15);padding:8px 16px;border-radius:99px;font-size:.9rem;font-weight:500}
+
+.hero-img img,.step3 img{object-position:72% 35%}
+.about-card{background:linear-gradient(145deg,var(--leaf),var(--leaf-dark));color:#fff;border-radius:var(--radius);padding:44px 36px;box-shadow:var(--shadow)}
+.about-card h3{color:#fff;font-size:2rem;margin-bottom:12px}
+.about-card p{color:#dcebc6;margin-bottom:18px}
+.about-card ul{list-style:none;display:grid;gap:10px;font-weight:500}
+/* FAQ / Contact */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:44px}
+details{background:#fff;border-radius:14px;padding:16px 20px;margin-bottom:12px;border:1px solid rgba(47,107,58,.12)}
+summary{font-weight:700;cursor:pointer;color:var(--leaf-dark)}
+details p{margin-top:10px;color:var(--muted);font-size:.95rem}
+form{background:#fff;border-radius:var(--radius);padding:30px;box-shadow:var(--shadow);display:grid;gap:14px}
+input,textarea{font:inherit;padding:13px 16px;border-radius:12px;border:1.5px solid #dde5d0;background:var(--cream);width:100%}
+input:focus,textarea:focus{outline:2px solid var(--lime);border-color:transparent}
+
+/* Footer */
+footer{background:var(--leaf-dark);color:#cfe0b8;padding:50px 0 24px}
+.foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:30px;margin-bottom:30px}
+footer h4{color:#fff;margin-bottom:10px;font-family:'Fraunces',serif}
+footer li{list-style:none;margin-bottom:6px}
+.copy{border-top:1px solid rgba(255,255,255,.12);padding-top:18px;font-size:.85rem;text-align:center}
+
+/* Cart drawer */
+.drawer{position:fixed;top:0;right:-420px;width:min(400px,100%);height:100%;background:#fff;z-index:100;box-shadow:-10px 0 40px rgba(0,0,0,.18);transition:right .3s;display:flex;flex-direction:column}
+.drawer.open{right:0}
+.drawer header{position:static;padding:20px 24px;display:flex;justify-content:space-between;align-items:center;background:var(--leaf-soft)}
+.drawer-items{flex:1;overflow:auto;padding:20px 24px}
+.ci{display:flex;justify-content:space-between;gap:10px;padding:12px 0;border-bottom:1px solid #eee}
+.ci small{color:var(--muted)}
+.ci button{background:none;border:0;color:#b34a3a;cursor:pointer;font-size:.85rem}
+.drawer-foot{padding:20px 24px;border-top:1px solid #eee}
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:90;display:none}
+.overlay.show{display:block}
+.toast{position:fixed;bottom:24px;left:50%;transform:translate(-50%,120px);background:var(--leaf-dark);color:#fff;padding:12px 24px;border-radius:99px;z-index:120;transition:.3s}
+.toast.show{transform:translate(-50%,0)}
+
+/* Responsive */
+@media(max-width:900px){
+  section{padding:60px 0}
+  .hero-grid,.about-grid,.two-col,.builder,.step,.step:nth-child(even){grid-template-columns:1fr}
+  .step:nth-child(even) .img{order:0}
+  .features-grid{grid-template-columns:1fr 1fr}
+  .recipes-grid{grid-template-columns:1fr 1fr}
+  nav{position:absolute;top:72px;left:0;right:0;background:var(--cream);display:none;padding:18px 4%;border-bottom:1px solid rgba(47,107,58,.1)}
+  nav.open{display:block}
+  nav ul{flex-direction:column;gap:14px}
+  .menu-toggle{display:block}
+  .foot-grid{grid-template-columns:1fr}
+  .badge{left:10px}
+}
+@media(max-width:560px){
+  .products-grid{gap:14px}
+  .card-body{padding:14px}
+  .card h3{font-size:1.05rem}
+  .card p,.card ul{display:none}
+  .price{font-size:1.15rem}
+  .btn-sm{padding:8px 12px;font-size:.8rem}
+  .recipes-grid,.features-grid{grid-template-columns:1fr}
+  .builder{padding:28px}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="wrap nav">
+    <a href="#home" class="logo"><span class="leaf">🌿</span> Moringa Kitchen</a>
+    <nav id="nav">
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#shop">Shop</a></li>
+        <li><a href="#recipes">Recipe Hub</a></li>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="nav-right">
+      <button class="cart-btn" onclick="toggleCart()">🛒 Cart<b id="cartCount">0</b></button>
+      <button class="menu-toggle" onclick="document.getElementById('nav').classList.toggle('open')" aria-label="Menu">☰</button>
+    </div>
+  </div>
+</header>
+
+<main>
+<!-- HOME / HERO -->
+<section class="hero" id="home">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">Everyday Nutrition Made Simple</span>
+      <h1>Bring the goodness of <em>moringa</em> to every meal</h1>
+      <p class="lead">Convenient moringa powders and flavourful cooking blends made for everyday Indian recipes.</p>
+      <ul>
+        <li>Shop individual products and combo packs</li>
+        <li>Discover easy, familiar recipes</li>
+        <li>Scan the QR code on your pack to learn how to use it</li>
+      </ul>
+      <div class="hero-btns">
+        <a href="#shop" class="btn btn-primary">Shop Now</a>
+        <a href="#recipes" class="btn btn-ghost">Explore Recipes</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <!-- IMAGE 1: main big startup image -->
+      <div class="img hero-img" data-name="1.jpeg"><img src="1.jpeg" alt="Cooking with Moringa Kitchen" onerror="fb(this)"></div>
+      <div class="badge">
+        <span>📱 Scan. Cook. Enjoy.<small>Recipes on every pack</small></span>
+        <img class="badge-qr" src="8.png" alt="Scan this QR code for recipes">
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="strip">
+  <div class="wrap">
+    <span>🌱 Everyday Indian cooking</span><span>📱 QR-linked recipes</span><span>📦 Single products &amp; combos</span><span>✅ Transparent quality</span>
+  </div>
+</div>
+
+<!-- SHOP: 2 rows x 2 columns -->
+<section id="shop">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Shop</span>
+      <h2>Simple products, made for your kitchen</h2>
+      <p>Pick a single product or save with a combo pack.</p>
+    </div>
+
+    <div class="products-grid">
+      <!-- PRODUCT 1 : IMAGE 2 -->
+      <article class="card">
+        <div class="img" data-name="3.jpeg"><img src="3.jpeg" alt="Pure Moringa Powder" onerror="fb(this)"></div>
+        <div class="card-body">
+          <span class="tag single">Single product</span>
+          <h3>Pure Moringa Powder</h3>
+          <p>100% moringa leaf powder for everyday cooking.</p>
+          <ul><li>100 g pack</li><li>Dal, roti, soups &amp; vegetables</li></ul>
+          <div class="card-foot">
+            <span class="price">₹149</span>
+            <button class="btn btn-primary btn-sm" onclick="addToCart('Pure Moringa Powder (100 g)',149)">Add to Cart</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- PRODUCT 2 : IMAGE 3 -->
+      <article class="card">
+        <div class="img" data-name="4.jpeg"><img src="4.jpeg" alt="Moringa Chutney Blend" onerror="fb(this)"></div>
+        <div class="card-body">
+          <span class="tag single">Single product</span>
+          <h3>Moringa Chutney Blend</h3>
+          <p>Moringa with selected spices and ingredients.</p>
+          <ul><li>100 g pack</li><li>Bhakri, roti, snacks &amp; meals</li></ul>
+          <div class="card-foot">
+            <span class="price tbd">Price coming soon</span>
+            <button class="btn btn-primary btn-sm" onclick="addToCart('Moringa Chutney Blend (100 g)',null)">Add to Cart</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- PRODUCT 3 : IMAGE 4 -->
+      <article class="card">
+        <div class="img" data-name="5.jpeg"><img src="5.jpeg" alt="Moringa Starter Combo" onerror="fb(this)"></div>
+        <div class="card-body">
+          <span class="tag combo">Combo pack</span>
+          <h3>Moringa Starter Combo</h3>
+          <p>Everything you need to begin.</p>
+          <ul><li>Pure Moringa Powder</li><li>Moringa Chutney Blend</li><li>Digital recipe guide via QR</li></ul>
+          <div class="card-foot">
+            <span class="price">₹279</span>
+            <button class="btn btn-primary btn-sm" onclick="addToCart('Moringa Starter Combo',279)">Buy Combo</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- PRODUCT 4 : IMAGE 5 -->
+      <article class="card">
+        <div class="img" data-name="2.jpeg"><img src="2.jpeg" alt="Moringa Kitchen Family Combo" onerror="fb(this)"></div>
+        <div class="card-body">
+          <span class="tag combo">Combo pack</span>
+          <h3>Moringa Kitchen Family Combo</h3>
+          <p>For families who want to explore every product.</p>
+          <ul><li>Pure powder + cooking blends</li><li>Recipe booklet / digital collection</li></ul>
+          <div class="card-foot">
+            <span class="price tbd">Price coming soon</span>
+            <button class="btn btn-ghost btn-sm" onclick="addToCart('Moringa Kitchen Family Combo',null)">Explore Combo</button>
+          </div>
+        </div>
+      </article>
+    </div>
+    <p class="note">Prices and sizes shown are proposed examples and will be confirmed before launch.</p>
+  </div>
+</section>
+
+<!-- QR RECIPE HUB: 3 steps, 3 rows x 1 column -->
+<section class="qr" id="qr">
+  <div class="wrap">
+    <div class="section-head" style="margin-inline:auto;text-align:center">
+      <span class="eyebrow">QR Recipe Hub</span>
+      <h2>Scan. Cook. Enjoy.</h2>
+      <p>Every pouch carries a QR code that opens a mobile-friendly recipe page, so you always know how to use your moringa.</p>
+    </div>
+
+    <div class="qr-steps">
+      <!-- STEP 1 : IMAGE 6 -->
+      <div class="step">
+        <div class="img" data-name="6.jpeg"><img src="6.jpeg" alt="Scan the QR code" onerror="fb(this)"></div>
+        <div>
+          <div class="num">1</div>
+          <h3>Scan the QR code</h3>
+          <p>Point your phone at the code printed on your product pouch. No app needed.</p>
+        </div>
+      </div>
+      <!-- STEP 2 : IMAGE 7 -->
+      <div class="step">
+        <div class="img" data-name="7.jpeg"><img src="7.jpeg" alt="Open the recipe" onerror="fb(this)"></div>
+        <div>
+          <div class="num">2</div>
+          <h3>Open the recipe</h3>
+          <p>See ingredients, exact quantities, preparation steps and how much moringa to use.</p>
+        </div>
+      </div>
+      <!-- STEP 3 : IMAGE 8 -->
+      <div class="step">
+        <div class="img step3" data-name="1.jpeg"><img src="1.jpeg" alt="Follow the instructions" onerror="fb(this)"></div>
+        <div>
+          <div class="num">3</div>
+          <h3>Follow the instructions</h3>
+          <p>Cook along with written steps, photographs or a short demonstration video.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RECIPE HUB -->
+<section id="recipes">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Recipe Hub</span>
+      <h2>What would you like to cook today?</h2>
+      <p>Pick a dish and see the moringa recipes that fit it.</p>
+    </div>
+    <div class="filters" id="filters">
+      <button class="chip active" data-f="all">All</button>
+      <button class="chip" data-f="dal">Dal</button>
+      <button class="chip" data-f="roti">Roti &amp; Paratha</button>
+      <button class="chip" data-f="soup">Soup</button>
+      <button class="chip" data-f="chutney">Chutney</button>
+      <button class="chip" data-f="rice">Khichdi</button>
+    </div>
+    <div class="recipes-grid" id="recipeGrid">
+      <a class="recipe" data-t="dal" href="#contact"><div class="emoji">🍲</div><h3>Moringa Dal</h3><p class="meta">Everyday comfort food</p><span class="uses">Pure Moringa Powder</span></a>
+      <a class="recipe" data-t="roti" href="#contact"><div class="emoji">🫓</div><h3>Moringa Roti / Bhakri</h3><p class="meta">Mix into the dough</p><span class="uses">Pure Moringa Powder</span></a>
+      <a class="recipe" data-t="soup" href="#contact"><div class="emoji">🥣</div><h3>Moringa Vegetable Soup</h3><p class="meta">Light and warming</p><span class="uses">Pure Moringa Powder</span></a>
+      <a class="recipe" data-t="chutney" href="#contact"><div class="emoji">🌶️</div><h3>Moringa Chutney</h3><p class="meta">Quick side for any meal</p><span class="uses">Chutney Blend</span></a>
+      <a class="recipe" data-t="roti" href="#contact"><div class="emoji">🥙</div><h3>Moringa Paratha</h3><p class="meta">Stuffed or plain</p><span class="uses">Powder or cooking blend</span></a>
+      <a class="recipe" data-t="rice" href="#contact"><div class="emoji">🍛</div><h3>Moringa Khichdi</h3><p class="meta">One-pot goodness</p><span class="uses">Pure Moringa Powder</span></a>
+    </div>
+    <p class="note" style="text-align:left">Each recipe page will include photo, time, servings, ingredients, steps, usage quantity, storage and allergen info.</p>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Why Moringa Kitchen</span>
+      <h2>We don't just sell moringa, we show you how to use it</h2>
+    </div>
+    <div class="features-grid">
+      <div class="feature"><div class="ico">🔍</div><h3>Smart Recipe Finder</h3><p>Choose a dish like dal or roti and see matching recipes.</p></div>
+      <div class="feature"><div class="ico">📱</div><h3>Scan-to-Recipe</h3><p>Every pack's QR opens recipes made for that product.</p></div>
+      <div class="feature"><div class="ico">🎬</div><h3>Recipe Videos</h3><p>Short videos for regular meals, easy to follow.</p></div>
+      <div class="feature"><div class="ico">⭐</div><h3>Genuine Reviews</h3><p>Honest feedback on taste, convenience and quality.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- COMBO BUILDER -->
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="builder">
+      <div>
+        <span class="eyebrow">Combo Builder</span>
+        <h2>Build your own moringa basket</h2>
+        <p>Tick what you'd like and see your total instantly.</p>
+      </div>
+      <div class="builder-opts">
+        <div class="opt"><label><input type="checkbox" data-n="Pure Moringa Powder" data-p="149"> Pure Moringa Powder</label><span>₹149</span></div>
+        <div class="opt"><label><input type="checkbox" data-n="Moringa Starter Combo" data-p="279"> Moringa Starter Combo</label><span>₹279</span></div>
+        <div class="opt"><label><input type="checkbox" data-n="Moringa Chutney Blend" data-p=""> Moringa Chutney Blend</label><span>Soon</span></div>
+        <div class="total"><span>Total</span><span id="comboTotal">₹0</span></div>
+        <button class="btn btn-primary" onclick="addBuilder()" style="background:var(--lime);color:var(--leaf-dark)">Add selection to cart</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT / QUALITY : IMAGE 9 -->
+<section id="about" style="padding-top:0">
+  <div class="wrap about-grid">
+    <div class="about-card">
+      <h3>Scan. Cook. Enjoy.</h3>
+      <p>Every pack opens a recipe page made for that product, so you always know what to cook.</p>
+      <ul>
+        <li>🌿 Clean, simple ingredients</li>
+        <li>📱 One permanent QR link per product</li>
+        <li>🍛 Recipes for dal, roti, soup and more</li>
+      </ul>
+    </div>
+    <div>
+      <span class="eyebrow">About Us</span>
+      <h2>Everyday nutrition, made simple</h2>
+      <p>Moringa Kitchen began with a simple idea: good ingredients are only useful when you know how to cook with them. We pair clean moringa products with easy recipes for the food you already make at home.</p>
+      <p>Our quality and safety information, including ingredients, batch details and applicable testing, will be shared openly on every product page.</p>
+      <div class="trust"><span>🌿 Accurate ingredients</span><span>📋 Batch details</span><span>🔬 Quality documentation</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ + CONTACT -->
+<section id="contact" style="background:#fff">
+  <div class="wrap two-col">
+    <div>
+      <span class="eyebrow">FAQs</span>
+      <h2 style="font-size:2rem;margin-bottom:20px">Questions, answered</h2>
+      <details><summary>How do I use the QR code?</summary><p>Scan it with your phone camera. It opens the recipe page for your product.</p></details>
+      <details><summary>Will the QR code keep working?</summary><p>Yes. Each QR points to a permanent page, so recipes can be updated anytime.</p></details>
+      <details><summary>How should I store moringa powder?</summary><p>Keep it sealed in a cool, dry place, following the instructions on the pack.</p></details>
+      <details><summary>How do I place an order?</summary><p>Add items to the cart and send your order enquiry. We'll confirm details with you.</p></details>
+    </div>
+    <div>
+      <span class="eyebrow">Contact Us</span>
+      <h2 style="font-size:2rem;margin-bottom:20px">Say hello</h2>
+      <form onsubmit="event.preventDefault();toast('Thanks! We will get back to you soon.');this.reset()">
+        <input required placeholder="Your name">
+        <input required type="email" placeholder="Email address">
+        <textarea rows="4" required placeholder="How can we help?"></textarea>
+        <button class="btn btn-primary" type="submit">Send Message</button>
+      </form>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div><h4>🌿 Moringa Kitchen</h4><p>Everyday Nutrition Made Simple.</p></div>
+      <div><h4>Explore</h4><ul><li><a href="#shop">Shop</a></li><li><a href="#recipes">Recipe Hub</a></li><li><a href="#about">About Us</a></li></ul></div>
+      <div><h4>Help</h4><ul><li><a href="#contact">Contact</a></li><li>Order Tracking (soon)</li><li>Policies</li></ul></div>
+    </div>
+    <div class="copy">© 2026 Moringa Kitchen. All rights reserved.</div>
+  </div>
+</footer>
+
+<!-- CART DRAWER -->
+<div class="overlay" id="overlay" onclick="toggleCart()"></div>
+<aside class="drawer" id="drawer">
+  <header><h3>Your Cart</h3><button class="menu-toggle" style="display:block" onclick="toggleCart()">✕</button></header>
+  <div class="drawer-items" id="cartItems"></div>
+  <div class="drawer-foot">
+    <div class="total" style="color:var(--leaf-dark)"><span>Total</span><span id="cartTotal" style="color:var(--leaf)">₹0</span></div>
+    <p class="note" style="text-align:left;margin:8px 0 14px">Items with "price soon" will be quoted when we confirm your order.</p>
+    <button class="btn btn-primary" style="width:100%" onclick="checkout()">Send Order Enquiry</button>
+  </div>
+</aside>
+<div class="toast" id="toast"></div>
+
+<script>
+let cart=[];
+const $=id=>document.getElementById(id);
+function toast(m){const t=$('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2400)}
+function toggleCart(){$('drawer').classList.toggle('open');$('overlay').classList.toggle('show')}
+function addToCart(name,price){
+  const i=cart.find(c=>c.name===name);
+  if(i)i.qty++;else cart.push({name,price,qty:1});
+  renderCart();toast(name+' added to cart');
+}
+function removeItem(n){cart=cart.filter(c=>c.name!==n);renderCart()}
+function renderCart(){
+  $('cartCount').textContent=cart.reduce((a,c)=>a+c.qty,0);
+  $('cartItems').innerHTML=cart.length?cart.map(c=>`
+    <div class="ci"><div><b>${c.name}</b><br><small>${c.price?'₹'+c.price:'Price soon'} × ${c.qty}</small></div>
+    <button onclick="removeItem('${c.name.replace(/'/g,"\\'")}')">Remove</button></div>`).join(''):'<p style="color:#888">Your cart is empty.</p>';
+  $('cartTotal').textContent='₹'+cart.reduce((a,c)=>a+(c.price||0)*c.qty,0);
+}
+function checkout(){
+  if(!cart.length){toast('Add something first');return}
+  const body=cart.map(c=>`${c.name} x ${c.qty}`).join('%0A');
+  location.href='mailto:hello@yourdomain.in?subject=Order Enquiry&body='+body;
+}
+/* Recipe filter */
+document.querySelectorAll('#filters .chip').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('#filters .chip').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active');
+  document.querySelectorAll('#recipeGrid .recipe').forEach(r=>{
+    r.classList.toggle('hide',b.dataset.f!=='all'&&r.dataset.t!==b.dataset.f);
+  });
+});
+/* Combo builder */
+const boxes=document.querySelectorAll('.builder input');
+boxes.forEach(b=>b.onchange=()=>{
+  $('comboTotal').textContent='₹'+[...boxes].filter(x=>x.checked).reduce((a,x)=>a+(+x.dataset.p||0),0);
+});
+function addBuilder(){
+  const sel=[...boxes].filter(x=>x.checked);
+  if(!sel.length){toast('Select at least one product');return}
+  sel.forEach(x=>addToCart(x.dataset.n,x.dataset.p?+x.dataset.p:null));
+  toggleCart();
+}
+/* Close mobile nav on click */
+document.querySelectorAll('nav a').forEach(a=>a.onclick=()=>$('nav').classList.remove('open'));
+/* Image fallback: if 1.png fails, try other common extensions */
+function fb(img){
+  const n=img.dataset.n||img.getAttribute('src').split('.')[0];
+  const i=+(img.dataset.i||0);
+  const e=['jpg','png','webp','JPEG','JPG','PNG','jfif'];
+  img.dataset.n=n;
+  if(i<e.length){img.dataset.i=i+1;img.src=n+'.'+e[i];}else{img.remove();}
+}
+renderCart();
+</script>
+</body>
+</html>
